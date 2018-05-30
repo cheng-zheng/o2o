@@ -1,6 +1,9 @@
 ThinkPHP 5.0
 ===============
  + quick启动命令:php -S localhost:8233 router.php
+
+    chmod -R 777 runtime
+
 ![](public/image/O2O_System.png)
 
 ![](public/image/sql_relation.jpg)

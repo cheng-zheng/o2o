@@ -2,4 +2,4 @@
 composer.lock
 *.log
 /SQL备份/
-/public/static/admin/hui/lib/
+/public/static/admin/hui/lib
