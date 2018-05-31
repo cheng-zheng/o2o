@@ -3,3 +3,5 @@ composer.lock
 *.log
 /SQL备份/
 /public/static/admin/hui/lib
+/public/upload
+/application/database.php

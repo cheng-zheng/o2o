@@ -19,6 +19,9 @@ class Category extends Controller
             $this->error('ID不合法');
         }
         $category = $this->obj->getNormalCategoryByParentId($id);
+        if(!$category){
+            return show(0, 'error');
+        }
         return show(1, 'success', $category);
     }
 

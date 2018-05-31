@@ -18,7 +18,11 @@ class City extends Controller
         if(!$id){
             $this->error('ID不合法');
         }
+        // 通过id获取耳机城市
         $citys = $this->obj->getNormalCitysByParentId($id);
+        if(!$citys){
+            return show(0,'error');
+        }
         return show(1, 'success', $citys);
     }
 

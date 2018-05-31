@@ -30,13 +30,14 @@ function status($s){
  * @return boolean
  * @author static7 <static7@qq.com>
  */
-function send_email($tomail, $name, $subject = '', $body = '', $attachment = null) {
-    // set time
-    date_default_timezone_set('PRC');
+function send_email($tomail, $subject = '', $body = '', $attachment = null) {
+
     if(empty($tomail)){
         return false;
     }
     try{
+        // set time
+        date_default_timezone_set('PRC');
         //实例化PHPMailer对象
         $mail = new PHPMailer();
         //设定邮件编码，默认ISO-8859-1，如果发中文此项必须设置，否则乱码
@@ -58,13 +59,16 @@ function send_email($tomail, $name, $subject = '', $body = '', $attachment = nul
         // SMTP服务器密码
         $mail->Password = config('email.password');
         //$mail->SetFrom('905618355@qq.com', '905618355');
+        // 设置发件人邮箱地址 同登录账号
         $mail->From = '905618355@qq.com';
         $replyEmail = '';                   //留空则为发件人EMAIL
         $replyName = '';                    //回复名称（留空则为发件人名称）
         $mail->AddReplyTo($replyEmail, $replyName);
+        // 添加该邮件的主题
         $mail->Subject = $subject;
-        $mail->MsgHTML($body);
-        $mail->AddAddress($tomail, $name);
+        // 添加邮件正文
+        $mail->Body = $body;
+        $mail->AddAddress($tomail);
         if (is_array($attachment)) { // 添加附件
             foreach ($attachment as $file) {
                 is_file($file) && $mail->AddAttachment($file);

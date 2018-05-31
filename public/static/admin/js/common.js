@@ -52,7 +52,9 @@ $('.cityId').change(function(){
     var url = SCOPE.city_url;
     var postDate = {'id': city_id};
     $.post(url, postDate, function(result){
+        // 相关业务处理
         if(result.status==1){
+            // 将信息填充到html
             var Data = result.data;
             var city_html='';
             for(var i=0; i<Data.length; i++){
@@ -67,12 +69,14 @@ $('.cityId').change(function(){
 /*分类相关二级内容*/
 $('.categoryId').change(function(){
     var categoryId_id = $(this).val();
+    // 抛送请求
     var url = SCOPE.category_url;
-    var postDate = {'id': categoryId_id};
+    var postDate = {'id': categoryId_id};console.log(postDate);
     $.post(url, postDate, function(result){
+        // 相关的业务处理
         if(result.status==1){
             var cData = result.data;
-            var category_html='';
+            var category_html = '';
             $(cData).each(function(i){
                 category_html += '<input name="se_category_id[]" type="checkbox" id="checkbox-moban" value="'+this.id+'"/>'+this.name+'<label for="checkbox-moban">&nbsp;</label>';
             });

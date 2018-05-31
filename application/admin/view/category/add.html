@@ -16,7 +16,7 @@
 				<select name="parent_id" class="select">
 					<option value="0">一级分类</option>
 					{foreach $category as $c}
-					<option value="">{$c.name}</option>
+					<option value="{$c.id}">{$c.name}</option>
 					{/foreach}
 				</select>
 				</span>
