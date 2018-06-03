@@ -17,14 +17,14 @@
                     </div>
                 </li>
                 {if condition="$user"}
-                <li><a href="{:url('user/logout')}">退出</a></li>
+                <li><a href="index.php{:url('user/logout')}">退出</a></li>
                 <li><a>欢迎您：{$user->username}</a></li>
                 {else /}
-                <li><a href="{:url('user/register')}">注册</a></li>
+                <li><a href="index.php{:url('user/register')}">注册</a></li>
                 <li>|</li>
-                <li><a href="{:url('user/login')}">登录</a></li>
+                <li><a href="index.php{:url('user/login')}">登录</a></li>
                 {/if}
-                <li><a href="{:url('bis/login')}">商户中心</a></li>
+                <li><a href="{:url('/bis/login')}">商户中心</a></li>
             </ul>
         </div>
     </div>
