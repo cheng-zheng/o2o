@@ -81,7 +81,7 @@ trait Jump
             $msg  = '';
         }
         if (is_null($url)) {
-            $url = Request::instance()->isAjax() ? '' : 'javascript:history.back(-1);';
+            $url = 'javascript:history.back(-1);';
         } elseif ('' !== $url) {
             $url = (strpos($url, '://') || 0 === strpos($url, '/')) ? $url : Url::build($url);
         }
@@ -131,17 +131,16 @@ trait Jump
      * @param string         $url 跳转的URL表达式
      * @param array|integer  $params 其它URL参数
      * @param integer        $code http code
-     * @param array          $with 隐式传参
      * @return void
      */
-    protected function redirect($url, $params = [], $code = 302, $with = [])
+    protected function redirect($url, $params = [], $code = 302)
     {
         $response = new Redirect($url);
         if (is_integer($params)) {
             $code   = $params;
             $params = [];
         }
-        $response->code($code)->params($params)->with($with);
+        $response->code($code)->params($params);
         throw new HttpResponseException($response);
     }
 

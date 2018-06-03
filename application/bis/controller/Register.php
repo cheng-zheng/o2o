@@ -18,12 +18,12 @@ class Register extends Controller
     }
 
     public function add(){
-        sleep(1000);    // 客户交钱后优化#滑稽
+        sleep(1);    // 客户交钱后优化#滑稽
         if(!request()->isPost()){
             $this->error('请求错误');
         }
         //获取表单值
-        $data = input('post.');
+        $data = input('post.');//input('post.','','htmlentities');配置了全局转换
         //检验数据
         $vaildate = Validate('Bis');
         if(!$vaildate->scene('add')->check($data)){
@@ -33,17 +33,26 @@ class Register extends Controller
 
         // 账户相关的信息校验
 
+        // 判定提交用户是否存在,邮箱是否存在
+        if(model('BisAccount')->get(['username'=>$data['username']])){
+            $this->error('该用户已存在');
+        };
+        if(model('Bis')->get(['email'=>$data['email']])){
+            $this->error('该邮箱已存在');
+        };
         // 获取经纬度
-        $lnglat = \Map::getLngLat($data['address']);
-        if(empty($lnglat) || $lnglat['status']!=0 || $lnglat['result']['precise']!=1){
+        $lnglat = json_decode( \Map::getLngLat($data['address'] ) , true);
+
+        if(empty($lnglat) || $lnglat['status']!=0 || $lnglat['result']['precise']!=0){
             $this->error('无法获取数据，或者匹配地址不精准');
         }
+
         //商户基本信息入库
         $bisData = [
             'name'          => $data['name'],
             'city_id'       => $data['city_id'],
             'city_path'     => empty($data['se_city_id']) ? '' : $data['city_id'].','.$data['se_city_id'],
-            'logo'         => $data['logo'],
+            'logo'          => $data['logo'],
             'licence_logo'  => $data['licence_logo'],
             'description'   => empty($data['description']) ? '' : $data['description'],
             'bank_info'     => $data['bank_info'],
@@ -57,10 +66,11 @@ class Register extends Controller
         if(!$bisId){
             $this->error('申请失败');
         }
+        // 门店
         // 总店相关信息入库
         $data['cat'] = '';
-        if(!empty($data['category_id'])){
-            $data['cat'] = implode('|',$data['se_cat']);
+        if(!empty($data['category_id']) && isset($data['se_category_id'])){
+            $data['cat'] = implode('|',$data['se_category_id']);
         }
         $locationData = [
             'bis_id'            => $bisId,
@@ -72,13 +82,13 @@ class Register extends Controller
             'category_path'     => $data['category_id'].','.$data['cat'],
             'city_id'           => $data['city_id'],
             'city_path'         => empty($data['se_city_id']) ? '' : $data['city_id'].','.$data['se_city_id'],
-            'address'           => $data['address'],
+            'api_address'           => $data['address'],
             'open_time'         => $data['open_time'],
             'open_time'         => $data['open_time'],
             'content'           => empty($data['content']) ? '' : $data['content'],
             'is_main'           => 1,   // 代表的是总店信息
-            'xpoint'           => empty($lnglat['result']['location']['lng'])?'':$lnglat['result']['location']['lng'],
-            'ypoint'           => empty($lnglat['result']['location']['lat'])?'':$lnglat['result']['location']['lng'],
+            'x_point'           => empty($lnglat['result']['location']['lng'])?'':$lnglat['result']['location']['lng'],
+            'y_point'           => empty($lnglat['result']['location']['lat'])?'':$lnglat['result']['location']['lng'],
         ];
         $locationId = model('BisLocation')->add($locationData);
         if(!$locationId){
@@ -100,15 +110,23 @@ class Register extends Controller
         }
 
         // 发送邮件
+        // https:// xxx.com/bis/register/waiting/1
         $url = request()->domain().url('bis/register/waiting', ['id'=>$bisId]);
         $title = 'o2o入驻申请 通知';
         $content = '您提交的入驻申请需要等待平台方审核，您可以通过点击链接<a href="'.$url.'" target="_blank">查看链接</a> 查看审核状态';
         send_email($data['email'],'o2o',$title, $content);
 
-        $this->success('申请成功');
+        $this->success('申请成功', url('register/waiting',['id'=>$bisId]));
     }
+    // 查看审核状态
+    public function waiting($id){
+        if(empty($id)){
+            $this->error('error');
+        }
+        $detail = model('Bis')->get($id);
 
-    public function waiting(){
-
+        return $this->fetch('',[
+            'detail'=>$detail
+        ]);
     }
 }

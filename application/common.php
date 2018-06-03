@@ -103,3 +103,49 @@ function doCurl($url, $type=0, $data=[]){
     curl_close($ch);
     return $output;
 }
+// 商户入驻申请的文案
+function bisRegister($status){
+    if($status == 1){
+        $str = '入驻申请成功';
+    }elseif($status==0){
+        $str = '待审核，审核后平台方会发送邮件通知，请关注邮件';
+    }elseif($status==2){
+        $str = '非常抱歉，您提交的材料不符合条件，请重新提交';
+    }else{
+        $str = '该申请已被删除';
+    }
+    return $str;
+}
+
+/**
+ * 通用分类样式
+ * @param $obj
+ * @return string
+ */
+function pagination($obj){
+    if(!$obj){
+        return '';
+    }
+    return '<div class="cl pd-5 bg-1 bk-gray mt-20 tp5-o2o">'.$obj->render().'</div>';
+}
+
+function getSeCityName($path){//4,6
+    if(!$path || empty($path)){
+        return '';
+    }
+    // 判断是否有逗号
+    if(preg_match('/,/',$path)){
+        $cityPath  = explode(',',$path);
+        $cityId = $cityPath[1];
+    }else{
+        $cityId = $path;
+    }
+    $city = model('City')->get($cityId);
+   return $city->name;
+}
+
+function my_captcha_img($id=""){
+    $js_src = "this.src='".captcha_src()."'";
+
+    return '<img id="captchaImg" src="' . captcha_src($id) . '" alt="captcha" onclick="'.$js_src.'"/>';
+}

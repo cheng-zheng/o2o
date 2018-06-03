@@ -43,7 +43,7 @@ return [
     // 是否开启多语言
     'lang_switch_on'         => false,
     // 默认全局过滤方法 用逗号分隔多个
-    'default_filter'         => '',
+    'default_filter'         => 'htmlentities',
     // 默认语言
     'default_lang'           => 'zh-cn',
     // 应用类库后缀
@@ -83,7 +83,7 @@ return [
     // pathinfo分隔符
     'pathinfo_depr'          => '/',
     // URL伪静态后缀
-    'url_html_suffix'        => 'html',
+    'url_html_suffix'        => false,//'html'
     // URL普通方式参数 用于自动生成
     'url_common_param'       => true,
     // URL参数方式 0 按名称成对解析 1 按顺序解析

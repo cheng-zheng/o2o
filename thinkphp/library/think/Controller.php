@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2006~2017 http://thinkphp.cn All rights reserved.
+// | Copyright (c) 2006~2016 http://thinkphp.cn All rights reserved.
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
@@ -13,19 +13,16 @@ namespace think;
 
 \think\Loader::import('controller/Jump', TRAIT_PATH, EXT);
 
+use think\Exception;
 use think\exception\ValidateException;
 
 class Controller
 {
     use \traits\controller\Jump;
 
-    /**
-     * @var \think\View 视图类实例
-     */
+    // 视图类实例
     protected $view;
-    /**
-     * @var \think\Request Request实例
-     */
+    // Request实例
     protected $request;
     // 验证失败是否抛出异常
     protected $failException = false;
@@ -40,7 +37,7 @@ class Controller
     protected $beforeActionList = [];
 
     /**
-     * 构造方法
+     * 架构函数
      * @param Request $request Request对象
      * @access public
      */

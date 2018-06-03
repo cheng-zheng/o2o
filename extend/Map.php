@@ -7,10 +7,11 @@
  * 百度地图相关业务封装
  */
 class Map {
-    /*
+    /**
      * 根据地址来获取经纬度
      * @param $address
-     * */
+     * @return mixed|string
+     */
     public static function getLngLat($address)
     {
         if(!$address){

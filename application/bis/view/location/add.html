@@ -2,7 +2,7 @@
 {include file="public/header" /}
 <div class="cl pd-5 bg-1 bk-gray mt-20"> 添加分店信息</div>
 <article class="page-container">
-	<form class="form form-horizontal" id="form-article-add" method="post" action="">
+	<form class="form form-horizontal" id="form-article-add" method="post" action="{:url('location/add')}">
 	基本信息：
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分店名称：</label>
@@ -98,7 +98,7 @@
 		</div>
 	</form>
 </article>
-<script>
+
 <!--包含尾部文件-->
 {include file="public/footer" /}
 <script type="text/javascript" src="__STATIC__/admin/hui/lib/ueditor/1.4.3/ueditor.config.js"></script>
@@ -106,10 +106,10 @@
 <script type="text/javascript" src="__STATIC__/admin/hui/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 <script>
  var SCOPE = {
-   'city_url' : '{:url('api/city/getCitysByParentId')}',
-    'category_url' : '{:url('api/category/getCategoryByParentId')}',
-	'uploadify_swf' : '__STATIC__/admin/uploadify/uploadify.swf',
-	'image_upload' : '{:url('api/image/upload')}',
+   'city_url' : "{:url('api/city/getCitysByParentId')}",
+    'category_url' : "{:url('api/category/getCategoryByParentId')}",
+	'uploadify_swf' : "__STATIC__/admin/uploadify/uploadify.swf",
+	'image_upload' : "{:url('api/image/upload')}",
  };
 </script>
 <script>

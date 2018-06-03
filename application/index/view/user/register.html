@@ -15,21 +15,21 @@
 <div class="wrapper">
     <div class="head">
         <ul>
-            <li><a href="index.html"><img src="__STATIC__/index/image/logo.png" alt="logo"></a></li>
+            <li><a href="/"><img src="__STATIC__/index/image/logo.png" alt="logo"></a></li>
             <li class="divider"></li>
-            <li><a href="index.html"></a></li>
+            <li><a href="/"></a></li>
         </ul>
         <div class="login-link">
             <span>我已注册，现在就</span>
-            <a href="login.html">登录</a>
+            <a href="login">登录</a>
         </div>
     </div>
 
     <div class="content">
-        <form>
+        <form >
             <p class="pass-form-item">
                 <label class="pass-label">用户名</label>
-                <input type="text" name="userName" class="pass-text-input" placeholder="请设置用户名">
+                <input type="text" name="username" class="pass-text-input" placeholder="请设置用户名">
             </p>
             <p class="pass-form-item">
                 <label class="pass-label">邮箱号</label>
@@ -38,19 +38,21 @@
 
             <p class="pass-form-item">
                 <label class="pass-label">密码</label>
-                <input type="text" name="password" class="pass-text-input" placeholder="请设置登录密码">
+                <input type="password" name="password" class="pass-text-input" placeholder="请设置登录密码">
             </p>
             <p class="pass-form-item">
                 <label class="pass-label">确认密码</label>
-                <input type="text" name="password" class="pass-text-input" placeholder="请设置登录密码">
+                <input type="password" name="repassword" class="pass-text-input" placeholder="请设置登录密码">
             </p>
             <p class="pass-form-item">
                 <label class="pass-label">验证码</label>
                 <input type="text" name="verifyCode" class="pass-text-input " placeholder="请输入验证码">
+                {:my_captcha_img()}
+                <p id="msg" style="color: #dc8b92;"></p>
             </p>
 
             <p class="pass-form-item">
-                <input type="submit" value="注册" class="pass-button">
+                <input onclick="register()" value="注册" class="pass-button">
             </p>
         </form>
 
@@ -62,5 +64,32 @@
         </div>
     </div>
 </div>
+<script>
+    var url = "{:url('user/register')}";
+    var successUrl = "{:url('user/login')}"
+    var $msg = $('#msg');
+    var $captchaImg = $('#captchaImg');
+    function register(){
+        var data  = {
+            'username'  : $("[name='username']").val(),
+            'email'     : $("[name='email']").val(),
+            'password'  : $("[name='password']").val(),
+            'repassword': $("[name='repassword']").val(),
+            'verifyCode': $("[name='verifyCode']").val(),
+        }
+        // 前端验证-------------------------------------
+
+        // 提交数据-------------------------------------
+        $captchaImg.attr('src','/captcha');
+        $.post(url,data,function(res){
+            if (res.status){
+                alert('注册成功');
+                location.href = successUrl;
+            }else {
+                $msg.html(res.msg);
+            }
+        },'json');
+    }
+</script>
 </body>
 </html>

@@ -1,19 +1,30 @@
 <?php
 namespace app\common\model;
 
-use think\Model;
 
-class BisLocation extends Model
+class BisLocation extends BaseModel
 {
-    protected $autoWriteTimestamp = true;
-    public function add($data)
-    {
-        $data['status'] = 0;
-        //$data['create_time'] = time();
-        $this->save($data);
-        return $this->id;
-
+    public function getBisByStatus($status=0){
+        $order = [
+            'id'    => 'desc',
+        ];
+        $data = [
+            'status'=> $status
+        ];
+        $result = $this->where($data)
+            ->order($order)
+            ->paginate(1);
+        return $result;
     }
 
-
+    public function getNormalLocationByBisId($bisId)
+    {
+        $data = [
+            'bis_id'    => $bisId,
+            'status'    => 1,
+        ];
+        return $this->where($data)
+            ->order('id','desc')
+            ->select();
+    }
 }

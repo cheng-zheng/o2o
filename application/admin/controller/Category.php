@@ -4,7 +4,7 @@ namespace app\admin\controller;
 
 use think\Controller;
 
-class Category extends Controller
+class Category extends Base
 {
     private $obj;
     public function _initialize()
@@ -100,7 +100,7 @@ class Category extends Controller
     /**
      * 状态
      */
-    public function status()
+    /*public function status()
     {
         $data = input('get.');//dump($data);
         $validate = validate('Category');
@@ -118,6 +118,6 @@ class Category extends Controller
         }else{
             $this->error('状态更新失败');
         }
-    }
+    }*/
 
 }

@@ -2,10 +2,10 @@
 namespace app\bis\controller;
 use think\Controller;
 
-class Index extends Controller
+class Index extends Base
 {
     public function index()
     {
-        return view('index');
+        return $this->fetch();
     }
 }

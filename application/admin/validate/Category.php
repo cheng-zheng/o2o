@@ -17,6 +17,6 @@ class Category extends Validate
     protected $scene = [
         'add'     => ['name','parent_id','id'], //添加
         'lostorder'=>['id','listorder'],        //排序
-        'status'    =>['id','statu']
+        'status'    =>['id','status']
     ];
 }
