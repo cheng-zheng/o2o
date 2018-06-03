@@ -77,7 +77,7 @@ return [
     // +----------------------------------------------------------------------
 
     // PATHINFO变量名 用于兼容模式
-    'var_pathinfo'           => 's',
+    'var_pathinfo'           => '/',
     // 兼容PATH_INFO获取
     'pathinfo_fetch'         => ['ORIG_PATH_INFO', 'REDIRECT_PATH_INFO', 'REDIRECT_URL'],
     // pathinfo分隔符
@@ -89,7 +89,7 @@ return [
     // URL参数方式 0 按名称成对解析 1 按顺序解析
     'url_param_type'         => 0,
     // 是否开启路由
-    'url_route_on'           => true,
+    'url_route_on'           => false,
     // 路由使用完整匹配
     'route_complete_match'   => false,
     // 路由配置文件（支持配置多个）

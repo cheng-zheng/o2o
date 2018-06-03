@@ -19,4 +19,4 @@ use think\Route;
     ]
 ];*/
 
-Route::get('index/user/login','index/user/login');
+//Route::get('index/user/login','index/user/login');
