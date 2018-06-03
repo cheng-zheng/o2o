@@ -8,7 +8,7 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
-
+use think\Route;
 /*return [
     '__pattern__' => [
         'name' => '\w+',
@@ -19,4 +19,4 @@
     ]
 ];*/
 
-Route::get('index/user/login','index/user/login'); 
+Route::get('index/user/login','index/user/login');
