@@ -42,16 +42,16 @@
                             <h3>笔记本</h3>
                             <ul class="reco-words">
                                 {foreach $fourSonCategory as $v}
-                                <li><a href="/index.php{:url('lists/index',['id'=>$v.id])}" target="_blank">{$v.name}</a></li>
+                                <li><a href="{:url('lists/index',['id'=>$v.id])}" target="_blank">{$v.name}</a></li>
                                 {/foreach}
-                                <li><a href="/index.php{:url('lists/index',['id'=>1])}" class="no-right-border no-right-padding" target="_blank">全部<span class="all-cate-arrow"></span></a></li>
+                                <li><a href="{:url('lists/index',['id'=>1])}" class="no-right-border no-right-padding" target="_blank">全部<span class="all-cate-arrow"></span></a></li>
                             </ul>
                         </div>
                         <ul class="itemlist eight-row-height">
                             {if condition="$datas"}
                             {foreach $datas as $v}
                                 <li class="j-card">
-                                <a href="/index.php{:url('detail/index',['id'=>$v.id])}" target="_blank">
+                                <a href="{:url('detail/index',['id'=>$v.id])}" target="_blank">
                                     <div class="imgbox">
                                         <ul class="marketing-label-container">
                                             <li class="marketing-label marketing-free-appoint"></li>
@@ -69,7 +69,7 @@
                                     </div>
                                 </a>
                                 <div class="contentbox">
-                                    <a href="/index.php{:url('detail/index',['id'=>$v.id])}" target="_blank">
+                                    <a href="{:url('detail/index',['id'=>$v.id])}" target="_blank">
                                         <div class="header">
                                             <h4 class="title ">【{$v.location_ids|countLocation}店通用】{$v.name}</h4>
                                         </div>
