@@ -10,20 +10,20 @@
                         <h3>热门城市</h3>
                         <ul class="son">
                             {foreach $citys as $v}
-                            <li><a href="{:url('index/index',['city'=>$v['uname']])}" >{$v.name}</a></li>
+                            <li><a href="/index.php{:url('index/index',['city'=>$v['uname']])}" >{$v.name}</a></li>
                             {/foreach}
                         </ul>
                     </div>
                 </li>
                 {if condition="$user"}
-                <li><a href="index.php{:url('user/logout')}">退出</a></li>
+                <li><a href="/index.php{:url('user/logout')}">退出</a></li>
                 <li><a>欢迎您：{$user->username}</a></li>
                 {else /}
-                <li><a href="index.php{:url('user/register')}">注册</a></li>
+                <li><a href="/index.php{:url('user/register')}">注册</a></li>
                 <li>|</li>
-                <li><a href="index.php{:url('user/login')}">登录</a></li>
+                <li><a href="/index.php{:url('user/login')}">登录</a></li>
                 {/if}
-                <li><a href="{:url('/bis/login')}">商户中心</a></li>
+                <li><a href="/index.php{:url('/bis/login')}">商户中心</a></li>
             </ul>
         </div>
     </div>
@@ -44,10 +44,10 @@
                         <div class="level-item">
                             <div class="first-level">
                                 <dl>
-                                    <dt class="title"><a target="_blank" href="{:url('lists/index',['id'=>$key])}" target="_top">{$cat[0]}</a></dt>
+                                    <dt class="title"><a target="_blank" href="/index.php{:url('lists/index',['id'=>$key])}" target="_top">{$cat[0]}</a></dt>
 
                                     {volist name="$cat[1]" id="v" length="2"}
-                                    <dd><a target="_blank" href="{:url('list/index',['id'=>$v.id])}" target="_top" class="">{$v.name}</a></dd>
+                                    <dd><a target="_blank" href="/index.php{:url('list/index',['id'=>$v.id])}" target="_top" class="">{$v.name}</a></dd>
                                     {/volist}
                                 </dl>
                             </div>
@@ -57,7 +57,7 @@
                                         <h3>热门分类</h3>
                                         <ul>
                                             {foreach $cat[1] as $v}
-                                            <li><a target="_blank" href="{:url('list/index',['id'=>$v.id])}">{$v.name}</a></li>
+                                            <li><a target="_blank" href="/index.php{:url('list/index',['id'=>$v.id])}">{$v.name}</a></li>
                                             {/foreach}
                                         </ul>
 
