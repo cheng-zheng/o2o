@@ -1,11 +1,15 @@
 ThinkPHP 5.0
 ===============
  + quick启动命令:php -S localhost:8233 router.php
+
 ##Linux
+
     chmod -R 777 runtime	#根目录
 	mkdir upload			#public目录的上传路径
 	chmod -R 777 upload
+
 ##Nginx
+
 不然要加index.php才能访问子url
 
 	location / {
