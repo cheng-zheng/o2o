@@ -362,3 +362,7 @@
     margin-right: 0;
     background-repeat: no-repeat;
 }
+
+.tp5-o2o .pagination li{display:inline; padding-left:10px;}
+.pagination .action{color:red}
+.pagination ,disabled{color:#888;}

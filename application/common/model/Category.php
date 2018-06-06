@@ -57,4 +57,38 @@ class Category extends Model
             ->order($order)
             ->select();
     }
+    // 分类数据
+    public function getNormalRecommendCategoryByParentId($id=0, $limit=5){
+        $data = [
+            'parent_id' => $id,
+            'status'    => 1,
+        ];
+        $order = [
+            'listorder' => 'desc',
+            'id'        => 'desc'
+        ];
+        $result = $this->where($data)->order($order);
+        if($limit){
+            $result = $result->limit($limit);
+        }
+
+        return $result->select();
+    }
+
+    public function getNormalCategoryIdParentId($ids){
+        $data = [
+            'parent_id' => ['in', implode(',',$ids)],
+            'status'    => 1,
+        ];
+        $order = [
+            'listorder' => 'desc',
+            'id'        => 'desc'
+        ];
+        $result = $this->where($data)
+            ->order($order)
+            ->select();
+
+
+        return $result;
+    }
 }

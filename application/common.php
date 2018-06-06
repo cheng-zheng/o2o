@@ -126,7 +126,9 @@ function pagination($obj){
     if(!$obj){
         return '';
     }
-    return '<div class="cl pd-5 bg-1 bk-gray mt-20 tp5-o2o">'.$obj->render().'</div>';
+    // 优化方法
+    $params = request()->param();
+    return '<div class="cl pd-5 bg-1 bk-gray mt-20 tp5-o2o">'.$obj->appends($params)->render().'</div>';
 }
 
 function getSeCityName($path){//4,6
@@ -148,4 +150,21 @@ function my_captcha_img($id=""){
     $js_src = "this.src='".captcha_src()."'";
 
     return '<img id="captchaImg" src="' . captcha_src($id) . '" alt="captcha" onclick="'.$js_src.'"/>';
+}
+// 多少号店
+function countLocation($ids){// 1,3,4,5
+    if($ids){
+       return 1;
+    }
+
+    if(preg_match('/,/',$ids)){
+        $arr = explode(',',$ids);
+        return count($arr);
+    }
+}
+// 设置订单号
+function setOrderSn(){
+    list($t1,$t2) = explode(' ', microtime());
+    $t3 = explode('.', $t1*10000);
+    return $t2.$t3[0].(rand(1000,99999));
 }

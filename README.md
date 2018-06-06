@@ -8,6 +8,10 @@ ThinkPHP 5.0
 
 ![](public/image/sql_relation.jpg)
 
+##微信扫码支付
+
+![](public/image/wechat_pay.jpg)
+
  + 基于命名空间和众多PHP新特性
  + 核心功能组件化
  + 强化路由功能

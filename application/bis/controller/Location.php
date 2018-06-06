@@ -56,7 +56,7 @@ class Location extends Base
                 'is_main'           => 0,   // 代表的是总店信息
                 'status'            => 1,
                 'x_point'           => empty($lnglat['result']['location']['lng'])?'':$lnglat['result']['location']['lng'],
-                'y_point'           => empty($lnglat['result']['location']['lat'])?'':$lnglat['result']['location']['lng'],
+                'y_point'           => empty($lnglat['result']['location']['lat'])?'':$lnglat['result']['location']['lat'],
             ];
             $locationId = model('BisLocation')->add($locationData);
             if($locationId){

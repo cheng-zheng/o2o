@@ -48,7 +48,7 @@ class Map {
             //'markers' => $center,
         ];
         $url = config('map.baidu_map_url').config('map.staticimage').'?'.http_build_query($data);
-        var_dump($url);
+        //var_dump($url);
         return $url;
         //dump($url);
         //第一种方法 file_get_contents($url);
