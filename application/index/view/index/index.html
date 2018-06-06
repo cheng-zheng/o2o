@@ -10,8 +10,8 @@
         <div class="top-container">
             <div class="mid-area">
                 <div class="slide-holder" id="slide-holder">
-                    <a href="#" class="slide-prev"><i class="slide-arrow-left"></i></a>
-                    <a href="#" class="slide-next"><i class="slide-arrow-right"></i></a>
+                    <a href="javascript:;" class="slide-prev"><i class="slide-arrow-left"></i></a>
+                    <a href="javascript:;" class="slide-next"><i class="slide-arrow-right"></i></a>
                     <ul class="slideshow">
                         {foreach $feature as $v}
                         <li><a href="" class="item-large"><img class="ad-pic" src="{$v.image}" /></a></li>
@@ -39,7 +39,7 @@
                     
                     <div class="floor-content">
                         <div class="floor-header">
-                            <h3>笔记本</h3>
+                            <!--<h3>笔记本</h3>-->
                             <ul class="reco-words">
                                 {foreach $fourSonCategory as $v}
                                 <li><a href="{:url('lists/index',['id'=>$v.id])}" target="_blank">{$v.name}</a></li>
@@ -47,9 +47,12 @@
                                 <li><a href="{:url('lists/index',['id'=>1])}" class="no-right-border no-right-padding" target="_blank">全部<span class="all-cate-arrow"></span></a></li>
                             </ul>
                         </div>
+                        {foreach $datas as $key=>$item}
+                        {if condition="$item"}<h1 style="font-size: 20px;color: #444;font-weight: 700; border-bottom: 1px solid #eee;">{$fourSonCategory[$key]->name}</h1>{/if}
+
                         <ul class="itemlist eight-row-height">
-                            {if condition="$datas"}
-                            {foreach $datas as $v}
+                            {if condition="$item"}
+                            {foreach $item as $v}
                                 <li class="j-card">
                                 <a href="{:url('detail/index',['id'=>$v.id])}" target="_blank">
                                     <div class="imgbox">
@@ -88,9 +91,10 @@
                             </li>
                             {/foreach}
                             {else /}
-                                <span style="color:red; font-size:24px;">该城市下没有此分类数据</span>
+                                <!--<span style="color:#ddd; font-size:14px;">该城市下没有此分类数据</span>-->
                             {/if}
                         </ul>
+                        {/foreach}
                     </div>
                 </div>
             </div>

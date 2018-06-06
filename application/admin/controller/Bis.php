@@ -4,7 +4,7 @@ namespace app\admin\controller;
 
 use think\Controller;
 
-class Bis extends Controller
+class Bis extends Base
 {
     private $obj;
     public function _initialize()

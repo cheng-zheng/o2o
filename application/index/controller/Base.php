@@ -53,7 +53,7 @@ class Base extends Controller
 
         $this->city = model('City')->where(['uname'=>$cityuname])->find();
     }
-
+    // 用户登录
     public function getLoginUser(){
         if(!$this->account){
             $this->account = session('o2o_user','','o2o');

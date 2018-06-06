@@ -1,14 +1,16 @@
 <?php
 namespace app\index\controller;
 
+use app\common\model\Category;
+use app\common\model\Deal as DealModel;
 use think\Controller;
 
 class Index extends Base
 {
-    public function index()
+    public function index(DealModel $deal, Category $category)
     {
         $this->featured();
-        $this->deal();
+        $this->deal($deal, $category);
         return $this->fetch();
     }
 
@@ -45,13 +47,16 @@ class Index extends Base
      * 商品分类 数据-美食 推荐的数据
      * 获取4个子分类
      */
-    private function deal(){
+    private function deal($deal, $category){
         //$datas = model('Deal')->getNormalDealByCategoryCityId(14,2 );
-        //商品分类 数据-美食 推荐的数据
-        $datas = model('Deal')->getNormalDealByCategoryCityId(14,$this->city->id );
 
-        // 获取4个子分类
-        $fourSonCategory = model('Category')->getNormalRecommendCategoryByParentId();
+        // 获取5个子分类
+        $fourSonCategory = $category->getNormalRecommendCategoryByParentId();
+        //商品分类 数据-美食 推荐的数据
+        $datas = [];
+        foreach ($fourSonCategory as $item) {
+            $datas[] = $deal->getNormalDealByCategoryCityId($item->id, $this->city->id );
+        }
         $this->assign([
             'datas' => $datas,
             'fourSonCategory'=>$fourSonCategory

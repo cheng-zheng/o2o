@@ -6,6 +6,16 @@ use think\Controller;
 
 class Base extends Controller
 {
+    public $admin;
+    public function _initialize()
+    {
+        // 判断用户是否登陆
+        $isLogin = $this->isLogin();
+        if(!$isLogin){
+            return $this->redirect(url('login/index'));
+        }
+    }
+
     public function status(){
         // 获取值
         $data = input('get.');
@@ -32,5 +42,22 @@ class Base extends Controller
         }else{
             $this->error('更新失败');
         }
+    }
+
+    // 判断是否登陆
+    public function isLogin(){
+        $user = $this->getLoginUser();
+        if($user && $user->is_main){
+            return true;
+        }
+        return false;
+    }
+
+    public function getLoginUser(){
+        if(!$this->admin){
+            $this->admin  = session('bisAccount', '', 'bis');
+        }
+
+        return  $this->admin;
     }
 }

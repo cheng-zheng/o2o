@@ -102,7 +102,7 @@ class Register extends Controller
             'username'  => $data['username'],
             'code'      => $data['code'],
             'password'  => md5($data['password']).$data['code'],
-            'is_main'   => 1,       //代表总店管理员
+            'is_main'   => 2,       //代表总店管理员 | 是否超级管理员
         ];
         $accountId = model('BisAccount')->add($accountData);
         if(!$accountId){
